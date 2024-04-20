@@ -43,6 +43,9 @@ exports.handler = async (event, context) => {
     return new Promise((resolve, reject) => {
         // Express app will automatically handle the request
         app(event, context, (error) => {
+            console.log(event)
+            console.log(context)
+            console.log(error)
             if (error) {
                 reject(error);
             } else {
