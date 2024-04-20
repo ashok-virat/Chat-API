@@ -2,12 +2,16 @@
 
 const express = require('express');
 const serverless = require('serverless-http');
+const bodyParser = require('body-parser');
 const router = express.Router();
 
-const api = express();
+const app = express();
 
-router.get("/hello", (req, res) => res.send("Hello World!"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-api.use(router);
+app.get("/hello", (req, res) => res.send("Hello World!"));
 
-exports.handler = serverless(api);
+// app.use(router);
+
+exports.handler = serverless(app);
