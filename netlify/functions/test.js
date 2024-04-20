@@ -13,10 +13,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-setRouter.setRouter(app);
+setRouter.setRouter(router);
 
 // Define a route
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
@@ -36,6 +36,8 @@ mongoose.connection.on('error', () => {
 mongoose.connection.on('open', () => {
     console.log('data base connection is open')
 })
+
+app.use(router)
 
 // Export the handler function
 exports.handler = async (event, context) => {
