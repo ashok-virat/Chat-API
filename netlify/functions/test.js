@@ -37,4 +37,17 @@ mongoose.connection.on('open', () => {
     console.log('data base connection is open')
 })
 
-// module.exports = router;
+// Export the handler function
+exports.handler = async (event, context) => {
+    // Use express's built-in request handling
+    return new Promise((resolve, reject) => {
+        // Express app will automatically handle the request
+        app(event, context, (error) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve();
+            }
+        });
+    });
+};
