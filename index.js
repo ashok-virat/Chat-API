@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 setRouter.setRouter(router);
 
 // Define a route
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
