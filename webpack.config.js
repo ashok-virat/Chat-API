@@ -21,6 +21,16 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
+            },
+            {
+                test: /\.(node)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'node_modules/@mongodb-js/zstd-darwin-arm64' // Adjust the outputPath as needed
+                    }
+                }
             }
         ]
     }
