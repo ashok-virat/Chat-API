@@ -39,20 +39,9 @@ mongoose.connection.on('open', () => {
 
 app.use(router)
 
-// Export the handler function
 exports.handler = async (event, context) => {
-    // Use express's built-in request handling
-    return new Promise((resolve, reject) => {
-        // Express app will automatically handle the request
-        app(event, context, (error) => {
-            console.log(event)
-            console.log(context)
-            console.log(error)
-            if (error) {
-                reject(error, 'error');
-            } else {
-                resolve();
-            }
-        });
-    });
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Hello from the serverless function!" })
+    };
 };
