@@ -11,19 +11,19 @@ api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
 
 const router = Router();
+mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true })
+
+mongoose.connection.on('error', () => {
+    console.log('data base connection is error')
+})
+
+mongoose.connection.on('open', () => {
+    console.log('data base connection is open')
+})
+
 router.get("/hello", async (req, res) => {
     try {
-        mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true })
-
-        mongoose.connection.on('error', () => {
-            console.log('data base connection is error')
-        })
-
-        mongoose.connection.on('open', () => {
-            res.send('data base connection is open')
-            console.log('data base connection is open')
-        })
-
+        res.send('hi')
     } catch (error) {
         // Handle any errors
         console.error(error);
