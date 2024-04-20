@@ -4,6 +4,7 @@ const { Router } = require("express");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const appconfig = require('../../app/config/appConfig');
+const controller = require('../../app/controller/userController')
 
 const api = express();
 
@@ -30,6 +31,8 @@ router.get("/hello", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+router.post("/signup", controller.signup);
 
 api.use("/api/", router);
 
