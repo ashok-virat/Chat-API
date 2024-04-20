@@ -47,7 +47,7 @@ exports.handler = async (event, context) => {
             console.log(context)
             console.log(error)
             if (error) {
-                reject(error);
+                reject(error, 'error');
             } else {
                 resolve();
             }
