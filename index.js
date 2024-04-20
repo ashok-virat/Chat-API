@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const setRouter = require('./app/route/route');
+const router = express.Router();
 
 const bodyParser = require('body-parser');
 const appconfig = require('./app/config/appConfig');
@@ -12,10 +13,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-setRouter.setRouter(app);
+setRouter.setRouter(router);
 
 // Define a route
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
@@ -35,3 +36,5 @@ mongoose.connection.on('error', () => {
 mongoose.connection.on('open', () => {
     console.log('data base connection is open')
 })
+
+module.exports = router;

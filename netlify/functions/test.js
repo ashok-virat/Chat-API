@@ -1,8 +1,12 @@
 // hello.js
 
+const express = require('express');
+const router = require('../../index'); // Import your API routes
+const app = express();
+
+// Use the API routes as middleware
+app.use(router);
+
 exports.handler = async (event, context) => {
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Hello from the serverless function!" })
-    };
+    // Your serverless function logic here
 };
