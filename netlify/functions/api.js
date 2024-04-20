@@ -7,8 +7,8 @@ const appconfig = require('../../app/config/appConfig');
 
 const api = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+api.use(bodyParser.urlencoded({ extended: false }));
+api.use(bodyParser.json());
 
 const router = Router();
 router.get("/hello", async (req, res) => {
