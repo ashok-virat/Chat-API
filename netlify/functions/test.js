@@ -8,6 +8,6 @@ const api = express();
 
 router.get("/hello", (req, res) => res.send("Hello World!"));
 
-api.use("/api/", router);
+api.use(router);
 
 exports.handler = serverless(api);
