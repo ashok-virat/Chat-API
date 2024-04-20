@@ -1,5 +1,5 @@
-const controller = require('./../controller/usercontroller')
-const appConfig = require('./../config/appConfig');
+const controller = require('../controller/userController.js')
+const appConfig = require('../config/appConfig.js');
 
 let setRouter = (app) => {
     let baseUrl = `${appConfig.apiVersion}`;
