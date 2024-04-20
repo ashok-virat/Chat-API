@@ -1,12 +1,12 @@
-const express = require('express');
-const serverless = require('serverless-http');
-const bodyParser = require('body-parser');
+const express = require('express')
+const serverless = require(serverless - http)
+const { Router } = require("express");
 
-const app = express();
+const api = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const router = Router();
+router.get("/hello", (req, res) => res.send("Hello World!"));
 
-app.get("/hello", (req, res) => res.send("Hello World!"));
+api.use("/api/", router);
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(api);
