@@ -28,16 +28,16 @@ exports.handler = async (event, context) => {
     });
 
     // Connect to MongoDB
-    await mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true });
+    // await mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
     // Log MongoDB connection status
-    mongoose.connection.on('error', () => {
-        console.log('Database connection error');
-    });
+    // mongoose.connection.on('error', () => {
+    //     console.log('Database connection error');
+    // });
 
-    mongoose.connection.on('open', () => {
-        console.log('Database connection open');
-    });
+    // mongoose.connection.on('open', () => {
+    //     console.log('Database connection open');
+    // });
 
     // Handle incoming requests
     const { httpMethod, path } = event;
