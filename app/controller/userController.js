@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const userpath = require('./../model/userModel');
 const userModel = mongoose.model('User');
+const messagepath = require('./../model/chatModel');
+const messageModel = mongoose.model('Message');
 
 
 let signup = async (req, res) => {
@@ -72,9 +74,44 @@ const getAllusers = async (req, res) => {
     }
 }
 
+async function createMessage(req, res) {
+    try {
+        const newMessage = new messageModel({
+            senderId: req.body.senderId,
+            receiverId: req.body.receiverId,
+            sender: req.body.sender,
+            receiver: req.body.receiver,
+            message: req.body.message
+        });
+        const data = await newMessage.save();
+        res.send(data)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+// Retrieve messages based on sender and receiver
+async function getMessages(req, res) {
+    try {
+        const messages = await messageModel.find({
+            $or: [
+                { senderId: req.body.senderId, receiverId: req.body.receiverId },
+                { senderId: req.body.receiverId, receiverId: req.body.senderId }
+            ]
+        }).sort({ timestamp: 1 });
+        res.send(messages)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+
+
 module.exports = {
     signup: signup,
     getuser: getuser,
     login: login,
-    getAllusers: getAllusers
+    getAllusers: getAllusers,
+    createMessage: createMessage,
+    getMessages: getMessages
 }
