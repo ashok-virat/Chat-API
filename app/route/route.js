@@ -6,6 +6,7 @@ let setRouter = (app) => {
     app.post(`${baseUrl}/signup`, controller.signup);
     app.get(`${baseUrl}/getuser/:userid`, controller.getuser);
     app.post(`${baseUrl}/login`, controller.login);
+    app.get(`${baseUrl}/getusers`, controller.getAllusers);
 }
 
 module.exports = {

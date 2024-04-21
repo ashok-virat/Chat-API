@@ -62,8 +62,19 @@ const getuser = async (req, res) => {
     }
 }
 
+const getAllusers = async (req, res) => {
+    try {
+        const data = await userModel.find()
+        res.send(data)
+    }
+    catch (e) {
+        res.send(e)
+    }
+}
+
 module.exports = {
     signup: signup,
     getuser: getuser,
-    login: login
+    login: login,
+    getAllusers: getAllusers
 }
