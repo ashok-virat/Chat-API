@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
         'Connection': 'keep-alive',
         'Cache-Control': 'no-cache'
     };
+    res.set(headers);
     res.writeHead(200, headers);
     res.write(`data: ${JSON.stringify('connection established')}\n\n`);
 })
