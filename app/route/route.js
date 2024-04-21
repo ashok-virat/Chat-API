@@ -11,6 +11,7 @@ const wsConnection = async (req, res) => {
     res.writeHead(200, headers);
     res.write(`data: ${JSON.stringify('connection established')}\n\n`);
     clients.push(res)
+    res.send('hi')
 };
 
 let setRouter = (app) => {
