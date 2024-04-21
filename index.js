@@ -21,16 +21,28 @@ const server = http.createServer(app);
 const socket = require('./app/lib/socket');
 socket.setServer(server);
 
-// Define a route
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
-});
-
 // Set up the server to listen on a port
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+
+server.listen(port);
+server.on('error', onerror);
+server.on('listening', onlistening);
+
+function onerror(error) {
+    console.log(error)
+}
+
+//event listener for Http server 'listening' event;
+function onlistening() {
+    var addr = server.address()
+    var bind = typeof addr === 'string' ? 'pipe' + addr : 'port' + addr.port;
+    ('Listening on' + bind)
+    console.log(bind)
+}
+
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
 
 
 mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true })

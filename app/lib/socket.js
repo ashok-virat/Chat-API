@@ -1,14 +1,15 @@
-const socketIO = require('socket.io');
+const { Server } = require("socket.io");
 
 let setServer = (server) => {
-    let io = socketIO(server);
+    const io = new Server(server);
     io.on('connection', (socket) => {
-        socket.on('chat message', (msg) => {
-            console.log('Message received: ', msg);
-            io.emit('chat message', msg);
+        console.log(socket)
+        console.log('a user connected');
+        socket.on("chat message", (msg) => {
+            io.emit('chat message', msg)
         });
+    });
 
-    })
 }
 
 module.exports = {
