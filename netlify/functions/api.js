@@ -18,7 +18,7 @@ api.use(bodyParser.json());
 
 const router = Router();
 
-const server = http.createServer(app);
+const server = http.createServer(api);
 socket.setServer(server);
 
 mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true })
