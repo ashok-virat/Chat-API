@@ -8,7 +8,7 @@ let setRouter = (app) => {
     app.post(`${baseUrl}/login`, controller.login);
     app.get(`${baseUrl}/getusers`, controller.getAllusers);
     app.post(`${baseUrl}/createMessage`, controller.createMessage);
-    app.get(`${baseUrl}/getMessages`, controller.getMessages);
+    app.post(`${baseUrl}/getMessages`, controller.getMessages);
 }
 
 module.exports = {
