@@ -44,6 +44,7 @@ router.get('/', (req, res) => {
     sendEvent('Data 1');
     setTimeout(() => sendEvent('Data 2'), 2000); // Send 'Data 2' after 2 seconds
     setTimeout(() => sendEvent('Data 3'), 4000); // Send 'Data 3' after 4 seconds
+    res.end('This is the final chunk');
 })
 
 setRouter.setRouter(router);
