@@ -5,8 +5,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const appconfig = require('../../app/config/appConfig');
 const setRouter = require('../../app/route/route');
+const cors = require('cors'); // Add this line
 
 const api = express();
+
+api.use(cors());
 
 api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
