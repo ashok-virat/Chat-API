@@ -27,19 +27,21 @@ mongoose.connection.on('open', () => {
 })
 
 router.get('/', (req, res) => {
-    // const headers = {
-    //     'Content-Type': 'text/event-stream',
-    //     'Connection': 'keep-alive',
-    //     'Cache-Control': 'no-cache'
-    // };
-    // res.setHeader('Content-Type', 'text/event-stream');
-    // res.setHeader('Cache-Control', 'no-cache');
-    // res.setHeader('Connection', 'keep-alive');
-    res.send('Data 1\n');
-    res.send('Data 2\n');
-    res.send('Data 3\n');
-    // Send response
-    res.end();
+    const headers = {
+        'Content-Type': 'text/event-stream',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'no-cache'
+    };
+    res.writeHead(200, headers);
+    // Function to send events
+    function sendEvent(data) {
+        res.write(`data: ${data}\n\n`);
+    }
+
+    // Send multiple events
+    sendEvent('Data 1');
+    setTimeout(() => sendEvent('Data 2'), 2000); // Send 'Data 2' after 2 seconds
+    setTimeout(() => sendEvent('Data 3'), 4000); // Send 'Data 3' after 4 seconds
 })
 
 setRouter.setRouter(router);
