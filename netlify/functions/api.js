@@ -26,6 +26,16 @@ mongoose.connection.on('open', () => {
     console.log('data base connection is open')
 })
 
+router.get('/', (req, res) => {
+    const headers = {
+        'Content-Type': 'text/event-stream',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'no-cache'
+    };
+    res.writeHead(200, headers);
+    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
+})
+
 setRouter.setRouter(router);
 
 api.use("/api/", router);
