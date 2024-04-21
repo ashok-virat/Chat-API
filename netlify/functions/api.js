@@ -33,9 +33,11 @@ router.get('/', (req, res) => {
         'Cache-Control': 'no-cache'
     };
     res.writeHead(200, headers);
+    res.flush();
     // Function to send events
     function sendEvent(data) {
         res.write(`data: ${data}\n\n`);
+        res.flush();
     }
 
     // Send multiple events
