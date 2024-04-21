@@ -9,9 +9,11 @@ const wsConnection = async (req, res) => {
         'Cache-Control': 'no-cache'
     };
     res.writeHead(200, headers);
-    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
     clients.push(res)
-    res.send('hi')
+    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
+    setInterval(() => {
+        res.write(`data: ${JSON.stringify('connection established')}\n\n`);
+    }, 2000);
 };
 
 let setRouter = (app) => {
