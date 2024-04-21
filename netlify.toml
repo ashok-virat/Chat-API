@@ -5,6 +5,7 @@
   force = true
   from = "/api/*"
   status = 200
+  headers = {  Content-Type = "text/event-stream"}
   to = "/.netlify/functions/api/:splat"
 [[headers]]
   for = "/*"
