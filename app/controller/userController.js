@@ -42,7 +42,7 @@ const login = async (req, res) => {
             password: req.body.password
         });
         if (data) {
-            res.status(200).send('logged in successfully')
+            res.status(200).send(data)
         }
         else {
             res.status(401).send('Invalid email/username or password');
