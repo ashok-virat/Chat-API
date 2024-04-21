@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const setRouter = require('./app/route/route');
 const router = express.Router();
+const http = require('http');
 
 const bodyParser = require('body-parser');
 const appconfig = require('./app/config/appConfig');
@@ -14,6 +15,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 setRouter.setRouter(app);
+
+const server = http.createServer(app);
+
+const socket = require('./app/lib/socket');
+socket.setServer(server);
 
 // Define a route
 app.get('/', (req, res) => {

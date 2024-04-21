@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const appconfig = require('../../app/config/appConfig');
 const setRouter = require('../../app/route/route');
 const cors = require('cors'); // Add this line
+const http = require('http');
+const socket = require('../../app/lib/socket');
 
 const api = express();
 
@@ -15,6 +17,10 @@ api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
 
 const router = Router();
+
+const server = http.createServer(app);
+socket.setServer(server);
+
 mongoose.connect(appconfig.db.uri, { useUnifiedTopology: true, useNewUrlParser: true })
 
 mongoose.connection.on('error', () => {
