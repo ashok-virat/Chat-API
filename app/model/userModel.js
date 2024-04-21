@@ -4,11 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const userModel = new Schema({
-    firstName: {
-        type: String,
-        default: ''
-    },
-    lastName: {
+    userName: {
         type: String,
         default: ''
     },

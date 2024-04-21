@@ -6,7 +6,7 @@ appConfig.env = "dev";
 appConfig.db = {
     uri: 'mongodb+srv://ashokChat:Viratashok@chat-app-free.gksijtl.mongodb.net/'
 }
-appConfig.apiVersion = "/api/v1";
+appConfig.apiVersion = "/v1";
 
 module.exports = {
     port: appConfig.port,

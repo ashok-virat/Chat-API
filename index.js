@@ -13,7 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-setRouter.setRouter(router);
+setRouter.setRouter(app);
 
 // Define a route
 app.get('/', (req, res) => {
