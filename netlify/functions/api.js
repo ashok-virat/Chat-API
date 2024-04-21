@@ -35,12 +35,11 @@ router.get('/', (req, res) => {
     // res.setHeader('Content-Type', 'text/event-stream');
     // res.setHeader('Cache-Control', 'no-cache');
     // res.setHeader('Connection', 'keep-alive');
-    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
-    res.set('X-From', 'Netlify');
-    res.set('Content-Type', 'text/event-stream');
-
+    res.write('Data 1\n');
+    res.write('Data 2\n');
+    res.write('Data 3\n');
     // Send response
-    res.send('Hello from the function!');
+    res.end();
 })
 
 setRouter.setRouter(router);
