@@ -27,15 +27,20 @@ mongoose.connection.on('open', () => {
 })
 
 router.get('/', (req, res) => {
-    const headers = {
-        'Content-Type': 'text/event-stream',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'no-cache'
-    };
-    res.setHeader('Content-Type', 'text/event-stream');
-    res.setHeader('Cache-Control', 'no-cache');
-    res.setHeader('Connection', 'keep-alive');
-    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
+    // const headers = {
+    //     'Content-Type': 'text/event-stream',
+    //     'Connection': 'keep-alive',
+    //     'Cache-Control': 'no-cache'
+    // };
+    // res.setHeader('Content-Type', 'text/event-stream');
+    // res.setHeader('Cache-Control', 'no-cache');
+    // res.setHeader('Connection', 'keep-alive');
+    // res.write(`data: ${JSON.stringify('connection established')}\n\n`);
+    res.set('X-From', 'Netlify');
+    res.set('Content-Type', 'text/event-stream');
+
+    // Send response
+    res.send('Hello from the function!');
 })
 
 setRouter.setRouter(router);
