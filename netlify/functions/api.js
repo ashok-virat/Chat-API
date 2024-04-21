@@ -37,16 +37,17 @@ router.get('/', (req, res) => {
     res.flush();
 
     // Send additional data every second
-    const interval = setInterval(() => {
-        res.write('Streaming data...\n');
-        res.flush();
-    }, 1000);
+    // const interval = setInterval(() => {
+    //     res.write('Streaming data...\n');
+    //     res.flush();
+    // }, 1000);
 
     // Close the connection after 10 seconds
-    setTimeout(() => {
-        clearInterval(interval);
-        res.end('Streaming finished');
-    }, 10000);
+    // setTimeout(() => {
+    //     clearInterval(interval);
+    //     res.end('Streaming finished');
+    // }, 10000);
+    res.end('Streaming finished');
 })
 
 setRouter.setRouter(router);
