@@ -36,8 +36,11 @@ router.get('/', (req, res) => {
     // res.setHeader('Cache-Control', 'no-cache');
     // res.setHeader('Connection', 'keep-alive');
     res.write('Data 1\n');
+    res.flush();
     res.write('Data 2\n');
+    res.flush();
     res.write('Data 3\n');
+    res.flush();
     // Send response
     res.end();
 })
