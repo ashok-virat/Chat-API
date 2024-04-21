@@ -32,7 +32,6 @@ router.get('/', (req, res) => {
         'Connection': 'keep-alive',
         'Cache-Control': 'no-cache'
     };
-    req.writeHead(200, headers)
     res.writeHead(200, headers);
     // Function to send events
     function sendEvent(data) {
