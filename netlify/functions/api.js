@@ -27,24 +27,26 @@ mongoose.connection.on('open', () => {
 })
 
 router.get('/', (req, res) => {
-    const headers = {
-        'Content-Type': 'text/event-stream',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'no-cache'
-    };
-    res.writeHead(200, headers);
-    res.flush();
-    // Function to send events
-    function sendEvent(data) {
-        res.write(`data: ${data}\n\n`);
-        res.flush();
-    }
+    // Setting up the content type
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
 
-    // Send multiple events
-    sendEvent('Data 1');
-    setTimeout(() => sendEvent('Data 2'), 2000); // Send 'Data 2' after 2 seconds
-    setTimeout(() => sendEvent('Data 3'), 4000); // Send 'Data 3' after 4 seconds
-    res.end('This is the final chunk');
+    // Sending the first chunk
+    res.write('This is the first chunk\n');
+
+    // Flushing the buffer to send the first chunk immediately
+    res.flush();
+
+    // Send additional data every second
+    const interval = setInterval(() => {
+        res.write('Streaming data...\n');
+        res.flush();
+    }, 1000);
+
+    // Close the connection after 10 seconds
+    setTimeout(() => {
+        clearInterval(interval);
+        res.end('Streaming finished');
+    }, 10000);
 })
 
 setRouter.setRouter(router);
