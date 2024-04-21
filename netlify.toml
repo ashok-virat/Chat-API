@@ -7,3 +7,6 @@
   status = 200
   headers = {X-From = "Netlify", Content-Type = "text/event-stream"}
   to = "/.netlify/functions/api/:splat"
+  [redirects.headers]
+    X-From = "Netlify"
+    Content-Type = "text/event-stream"
