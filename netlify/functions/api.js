@@ -35,11 +35,14 @@ router.get('/', (req, res) => {
     // res.setHeader('Content-Type', 'text/event-stream');
     // res.setHeader('Cache-Control', 'no-cache');
     // res.setHeader('Connection', 'keep-alive');
-    res.write('Data 1\n');
-    res.write('Data 2\n');
-    res.write('Data 3\n');
-    // Send response
-    res.end();
+    let count = 0;
+    setInterval(() => {
+        res.write('Data 3\n');
+        count = count + 1
+        if (count == 5) {
+            res.end();
+        }
+    }, 2000);
 })
 
 setRouter.setRouter(router);
