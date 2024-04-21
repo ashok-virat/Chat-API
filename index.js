@@ -18,8 +18,8 @@ setRouter.setRouter(app);
 
 const server = http.createServer(app);
 
-const socket = require('./app/lib/socket');
-socket.setServer(server);
+// const socket = require('./app/lib/socket');
+// socket.setServer(server);
 
 // Set up the server to listen on a port
 const port = process.env.PORT || 3000;

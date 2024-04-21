@@ -74,7 +74,7 @@ const getAllusers = async (req, res) => {
     }
 }
 
-async function createMessage(req, res) {
+async function createMessage(req, res, clients) {
     try {
         const newMessage = new messageModel({
             senderId: req.body.senderId,
@@ -83,6 +83,9 @@ async function createMessage(req, res) {
             receiver: req.body.receiver,
             message: req.body.message
         });
+        clients.forEach(res => {
+            res.write(`data: ${JSON.stringify(newMessage)}\n\n`);
+        })
         const data = await newMessage.save();
         res.send(data)
     } catch (error) {
