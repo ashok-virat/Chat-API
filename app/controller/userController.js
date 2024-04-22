@@ -66,7 +66,7 @@ const getuser = async (req, res) => {
 
 const getAllusers = async (req, res) => {
     try {
-        const data = await userModel.find()
+        const data = await userModel.find().select('-password');
         res.send(data)
     }
     catch (e) {
