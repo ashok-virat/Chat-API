@@ -101,7 +101,7 @@ async function getMessages(req, res) {
                 { senderId: req.body.senderId, receiverId: req.body.receiverId },
                 { senderId: req.body.receiverId, receiverId: req.body.senderId }
             ]
-        }).sort({ timestamp: 1 });
+        })
         res.send(messages)
     } catch (error) {
         res.send(error)
