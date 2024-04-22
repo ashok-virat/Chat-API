@@ -5,7 +5,26 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const appconfig = require('../../app/config/appConfig');
 const setRouter = require('../../app/route/route');
-const cors = require('cors'); // Add this line
+const cors = require('cors');
+
+// WebSocket server (outside of the serverless function)
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on('connection', function connection(ws) {
+    console.log('Client connected');
+
+    ws.on('message', function incoming(message) {
+        console.log('Received: %s', message);
+        // Broadcast message to all clients
+        wss.clients.forEach(function each(client) {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+        });
+    });
+});
 
 const api = express();
 
@@ -27,22 +46,7 @@ mongoose.connection.on('open', () => {
 })
 
 router.get('/', (req, res) => {
-    // const headers = {
-    //     'Content-Type': 'text/event-stream',
-    //     'Connection': 'keep-alive',
-    //     'Cache-Control': 'no-cache'
-    // };
-    // res.setHeader('Content-Type', 'text/event-stream');
-    // res.setHeader('Cache-Control', 'no-cache');
-    // res.setHeader('Connection', 'keep-alive');
-    res.write('Data 1\n');
-    res.flush();
-    res.write('Data 2\n');
-    res.flush();
-    res.write('Data 3\n');
-    res.flush();
-    // Send response
-    res.end();
+    // here add the real time data sharing
 })
 
 setRouter.setRouter(router);
