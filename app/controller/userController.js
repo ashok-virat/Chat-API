@@ -3,6 +3,8 @@ const userpath = require('./../model/userModel');
 const userModel = mongoose.model('User');
 const messagepath = require('./../model/chatModel');
 const messageModel = mongoose.model('Message');
+const imagepath = require('./../model/imageModel');
+const imageModel = mongoose.model('Image');
 
 
 let signup = async (req, res) => {
@@ -109,6 +111,51 @@ async function getMessages(req, res) {
 }
 
 
+async function storeImgaes(req, res) {
+    try {
+        const image = new imageModel({
+            image: req?.file?.path ? req.file.path : '',
+            postStatus: req.body.postStatus,
+            text: req.body.text,
+            userName: req.body.userName,
+            userId: req.body.userId
+        });
+        await image.save();
+
+        res.send('Post uploaded successfully');
+    } catch (error) {
+
+        res.status(500).send('Error Posting story');
+    }
+}
+
+async function getMessages(req, res) {
+    try {
+        const stories = await imageModel.find()
+        res.send(stories)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+async function getUserStories(req, res) {
+    try {
+        const stories = await imageModel.find()
+        res.send(stories)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+async function getUserStory(req, res) {
+    try {
+        const stories = await imageModel.find({ userId: req.params.userId })
+        res.send(stories)
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 
 module.exports = {
     signup: signup,
@@ -116,5 +163,8 @@ module.exports = {
     login: login,
     getAllusers: getAllusers,
     createMessage: createMessage,
-    getMessages: getMessages
+    getMessages: getMessages,
+    storeImgaes: storeImgaes,
+    getUserStories: getUserStories,
+    getUserStory: getUserStory
 }

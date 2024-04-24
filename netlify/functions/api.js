@@ -28,6 +28,8 @@ wss.on('connection', function connection(ws) {
 
 const api = express();
 
+api.use('../../uploads', express.static('uploads'));
+
 api.use(cors());
 
 api.use(bodyParser.urlencoded({ extended: false }));

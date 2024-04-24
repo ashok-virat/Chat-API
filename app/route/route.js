@@ -1,20 +1,23 @@
 const controller = require('../controller/userController.js')
 const appConfig = require('../config/appConfig.js');
+const multer = require('multer');
 
-let clients = [];
-const wsConnection = async (req, res) => {
-    const headers = {
-        'Content-Type': 'text/event-stream',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'no-cache'
-    };
-    res.writeHead(200, headers);
-    clients.push(res)
-    res.write(`data: ${JSON.stringify('connection established')}\n\n`);
-    setInterval(() => {
-        res.write(`data: ${JSON.stringify('connection established')}\n\n`);
-    }, 2000);
-};
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    }
+})
+
 
 let setRouter = (app) => {
     let baseUrl = `${appConfig.apiVersion}`;
@@ -26,7 +29,9 @@ let setRouter = (app) => {
         controller.createMessage(req, res, clients);
     }));
     app.post(`${baseUrl}/getMessages`, controller.getMessages);
-    app.get(`${baseUrl}/socket`, wsConnection);
+    app.post(`${baseUrl}/post`, upload.single('image'), controller.storeImgaes);
+    app.get(`${baseUrl}/getUserStory/:userId`, controller.getUserStory);
+    app.get(`${baseUrl}/getUserStories`, controller.getUserStories);
 }
 
 module.exports = {

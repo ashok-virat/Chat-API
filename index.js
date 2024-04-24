@@ -11,6 +11,8 @@ const appconfig = require('./app/config/appConfig');
 // Create an instance of Express
 const app = express();
 
+app.use('/uploads', express.static('uploads'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
