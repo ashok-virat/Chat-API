@@ -129,14 +129,6 @@ async function storeImgaes(req, res) {
     }
 }
 
-async function getMessages(req, res) {
-    try {
-        const stories = await imageModel.find()
-        res.send(stories)
-    } catch (error) {
-        res.send(error)
-    }
-}
 
 async function getUserStories(req, res) {
     try {
