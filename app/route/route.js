@@ -26,7 +26,7 @@ let setRouter = (app) => {
     app.post(`${baseUrl}/login`, controller.login);
     app.get(`${baseUrl}/getusers`, controller.getAllusers);
     app.post(`${baseUrl}/createMessage`, app.post(`${baseUrl}/createMessage`, (req, res) => {
-        controller.createMessage(req, res, clients);
+        controller.createMessage(req, res);
     }));
     app.post(`${baseUrl}/getMessages`, controller.getMessages);
     app.post(`${baseUrl}/post`, upload.single('image'), controller.storeImgaes);
