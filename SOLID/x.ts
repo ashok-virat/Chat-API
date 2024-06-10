@@ -448,7 +448,7 @@ new Store().payBill()
 
 // after - DIP
 interface PaymentMethod {
-    processPayment(amount: number): void
+    processPayment(amount: number): string
 }
 
 class CreditCard1 implements PaymentMethod {  // Low level module
