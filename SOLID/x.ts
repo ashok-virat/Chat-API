@@ -353,8 +353,8 @@ class paypal implements PaymentMethod {  // Low level module
 }
 
 class Store1 { // High level module
-    processPayment: any
-    constructor(processPayment: any) {
+    processPayment: PaymentMethod
+    constructor(processPayment: PaymentMethod) {
         this.processPayment = processPayment;
     }
     makePayment(amount: number) {

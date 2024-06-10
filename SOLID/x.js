@@ -244,7 +244,7 @@ var Store = /** @class */ (function () {
         this.processPayment = new CreditCard();
     }
     Store.prototype.payBill = function () {
-        console.log(this.processPayment.makePayment());
+        return this.processPayment.makePayment();
     };
     return Store;
 }());
