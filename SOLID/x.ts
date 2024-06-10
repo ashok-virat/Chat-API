@@ -482,3 +482,61 @@ console.log(new Store1(paypalMethod).makePayment(89))
 
 
 
+//summary of each principle
+
+// 1. Single Responsibility Principle (SRP)
+// Definition: A class should have only one reason to change, meaning it should only have one job or responsibility.
+
+// Benefit: Makes the system easier to maintain and understand.
+
+// Example:
+
+// Before: A ZooEntity class handling details of staff, visitors, and animals.
+// After: Separate classes (Staff, Visitor, Animal) for each responsibility.
+// 2. Open/Closed Principle (OCP)
+// Definition: Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+
+// Benefit: Enhances code flexibility and minimizes the risk of introducing bugs when extending functionality.
+
+// Example:
+
+// Before: A Bird class with multiple if conditions to handle different species' flying and swimming behaviors.
+// After: Separate classes (Pigeon, Eagle, Penguin) extending Bird and overriding methods as needed.
+// 3. Liskov Substitution Principle (LSP)
+// Definition: Subtypes must be substitutable for their base types without altering the correctness of the program.
+
+// Benefit: Ensures that derived classes can be used interchangeably with their base classes, promoting reliable code reuse.
+
+// Example:
+
+// Using interfaces such as Flyable and Swimmable to ensure that subclasses like Penguin don't force behaviors that don't apply to them (e.g., flying).
+// 4. Interface Segregation Principle (ISP)
+// Definition: No client should be forced to depend on methods it does not use. Prefer small, specific interfaces over large, general-purpose ones.
+
+// Benefit: Promotes cleaner, more modular code by ensuring that classes only implement interfaces relevant to them.
+
+// Example:
+
+// Creating small interfaces like Flyable and Swimmable instead of a single large interface for all animal behaviors.
+// 5. Dependency Inversion Principle (DIP)
+// Definition: High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details. Details should depend on abstractions.
+
+// Benefit: Decouples high-level and low-level modules, making the system more flexible and easier to maintain.
+
+// Example:
+
+// Before: A Store class directly instantiates a CreditCard class for payments.
+// After: The Store class depends on an PaymentMethod interface, allowing different payment methods (CreditCard, PayPal) to be used interchangeably.
+// Summary
+// By adhering to the SOLID principles:
+
+// SRP: Your classes have single, well-defined responsibilities.
+// OCP: Your system can be extended with new features without modifying existing code.
+// LSP: Your subclasses are interchangeable with their base classes.
+// ISP: Your interfaces are small and specific, leading to cleaner and more modular code.
+// DIP: Your high-level modules depend on abstractions rather than concrete implementations, promoting flexibility and reducing coupling.
+// These principles collectively lead to more maintainable, flexible, and robust software design. Well done on mastering them!
+
+
+
+
