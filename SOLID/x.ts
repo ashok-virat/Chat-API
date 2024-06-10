@@ -30,7 +30,6 @@ class ZooEntity {
         return 'name ' + this.name + 'age ' + this.age + 'gender ' + this.gender
     }
 }
-
 class Visitor extends ZooEntity {
     ticketId: number;
     isVip: boolean;
@@ -52,7 +51,6 @@ class Visitor extends ZooEntity {
         return this.age >= 18
     }
 }
-
 class Staff extends ZooEntity {
     staffId: string
     salary: number
@@ -109,7 +107,6 @@ class Animal extends ZooEntity {
     }
 }
 
-
 // open closed principle - your code should be closed for modification, but still, remain open to extension!
 // before
 class Bird extends Animal {
@@ -120,7 +117,6 @@ class Bird extends Animal {
         this.beakLength = beakLength
         this.wingSpan = wingSpan
     }
-
     // fly() {
     //     let flyType = ''
     //     if (this.species === 'pigeon') {
@@ -220,15 +216,17 @@ class Penguin extends Bird {
 // Penguin,kiwi class should not have a method related to flying because they cannot fly, so we should use interface
 
 //after
-interface flyingType {
+interface IcanFly {
     flyingType(): string;
+    spreadWings(): boolean;
+    flapWings(): string
 }
 
 interface swimable {
     swim(): string;
 }
 
-class kiwi extends Bird implements swimable {
+class Penguin1 extends Bird implements swimable {
     constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
         super(name, age, gender, species, canFly, isVegtarian, ate, canBreathUnderWater, playfullAnimal, beakLength, wingSpan)
     }
@@ -237,23 +235,82 @@ class kiwi extends Bird implements swimable {
     }
 }
 
-class Pigeon2 extends Bird implements flyingType {
+class Pigeon2 extends Bird implements IcanFly {
     constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
         super(name, age, gender, species, canFly, isVegtarian, ate, canBreathUnderWater, playfullAnimal, beakLength, wingSpan)
     }
     flyingType() {
         return 'flap wings, i can fly'
     }
+    spreadWings() {
+        return true
+    }
+    flapWings() {
+        return 'yes, faslty!'
+    }
 }
 
-class Eagle2 extends Bird implements flyingType {
+class Eagle2 extends Bird implements IcanFly {
     constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
         super(name, age, gender, species, canFly, isVegtarian, ate, canBreathUnderWater, playfullAnimal, beakLength, wingSpan)
     }
     flyingType() {
         return 'spread wings and glide elegantly'
     }
+    spreadWings() {
+        return true
+    }
+    flapWings() {
+        return 'yes,glide elegantly and flap faslty!'
+    }
 }
 
-let newAnimal = new kiwi('ashok', 12, 'male', 'penguin', true, false, false, false, false, 12, 50);
+let newAnimal = new Penguin1('ashok', 12, 'male', 'penguin', true, false, false, false, false, 12, 50);
 console.log(newAnimal.swim())
+
+// Interface Segregation Principle - Keep your interfaces minimal
+// The clients of your interface (other pieces of code that implement your interface) should not be forced to implement methods that they don't need
+
+// Single Responsibility - general principle
+//Liskov Substitution - type hierarchy (mathematical principle)
+//SRP vs ISP => ISP can apply to APIs as well, not just classes
+// All SOLID principles are tightly linked to each other. You see view them
+
+// split then interface based on the usecase (superman,skathiman also can fly but they don't have a wings)
+interface flyingType {
+    flyingType(): string
+}
+
+interface IhasSuperBreath {
+    superBreath(): string
+}
+
+interface IhasWings {
+    flapWings(): string
+    spreadWings(): boolean
+}
+class superman extends Bird implements flyingType, IhasSuperBreath {
+    constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
+        super(name, age, gender, species, canFly, isVegtarian, ate, canBreathUnderWater, playfullAnimal, beakLength, wingSpan)
+    }
+    flyingType() {
+        return "combination of powers he derives from Earth's “yellow” Sun and from his extraterrestrial biology"
+    }
+    superBreath() {
+        return "Superman's breath was capable of freezing objects and generating hurricane-force winds."
+    }
+}
+class Eagle3 extends Bird implements IhasWings {
+    constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
+        super(name, age, gender, species, canFly, isVegtarian, ate, canBreathUnderWater, playfullAnimal, beakLength, wingSpan)
+    }
+    flyingType() {
+        return 'spread wings and glide elegantly'
+    }
+    spreadWings() {
+        return true
+    }
+    flapWings() {
+        return 'yes,glide elegantly and flap faslty!'
+    }
+}
