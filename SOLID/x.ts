@@ -177,8 +177,6 @@ class Eagle extends Bird {
 // child classes should NOT violate expectations set by the parents
 
 // before 
-
-
 // In this example, Penguin inherits from Bird but cannot fly. Calling fly on a Penguin instance results in an error, breaking the substitution principle. A Penguin cannot be substituted for a Bird without altering the behavior of the program.
 class Penguin extends Bird {
     constructor(name: string, age: number, gender: string, species: string, canFly: boolean, isVegtarian: boolean, ate: boolean, canBreathUnderWater: boolean, playfullAnimal: boolean, beakLength: number, wingSpan: number) {
@@ -265,9 +263,6 @@ class Eagle2 extends Bird implements IcanFly {
     }
 }
 
-let newAnimal = new Penguin1('ashok', 12, 'male', 'penguin', true, false, false, false, false, 12, 50);
-console.log(newAnimal.swim())
-
 // Interface Segregation Principle - Keep your interfaces minimal
 // The clients of your interface (other pieces of code that implement your interface) should not be forced to implement methods that they don't need
 
@@ -314,3 +309,65 @@ class Eagle3 extends Bird implements IhasWings {
         return 'yes,glide elegantly and flap faslty!'
     }
 }
+
+// Dependency Inversion Principle - any code (high/low level) should NEVER depend on low level implementation details
+
+// payment method - simple example
+
+// before
+class CreditCard {  // Low level module
+    makePayment() {
+        return 'payment method completed using credit card'
+    }
+}
+
+class Store { // High level module
+    processPayment: CreditCard
+    constructor() {
+        this.processPayment = new CreditCard()
+    }
+    payBill() {
+        return this.processPayment.makePayment()
+    }
+}
+
+new Store().payBill()
+
+// In this example store is tigtly coupled  with CreditCard. if we want to add the new payment method we should rewrite the store class it's against to the OCP 
+
+// after - DIP
+interface PaymentMethod {
+    processPayment(amount: number): void
+}
+
+class CreditCard1 implements PaymentMethod {  // Low level module
+    processPayment(amount: number) {
+        return `payment method completed using credit card ${amount}`
+    }
+}
+
+class paypal implements PaymentMethod {  // Low level module
+    processPayment(amount: number) {
+        return `payment method completed using paypal ${amount}`
+    }
+}
+
+class Store1 { // High level module
+    processPayment: any
+    constructor(processPayment: any) {
+        this.processPayment = processPayment;
+    }
+    makePayment(amount: number) {
+        return this.processPayment.processPayment(amount)
+    }
+}
+
+const creditCardMethod = new CreditCard1()
+console.log(new Store1(creditCardMethod).makePayment(100))
+
+const paypalMethod = new paypal()
+console.log(new Store1(paypalMethod).makePayment(89))
+
+
+
+
