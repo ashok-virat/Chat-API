@@ -21,6 +21,19 @@ const upload = multer({
 
 let setRouter = (app) => {
     let baseUrl = `${appConfig.apiVersion}`;
+    app.get(`${baseUrl}/`, async (req, res) => {
+        // blocking loop
+        for (let i = 0; i <= 1000000; i++) {
+            console.log(i)
+        }
+        res.send('hi')
+    });
+    app.get(`${baseUrl}/get`, (req, res) => {
+        setTimeout(() => {
+            console.log('hello')
+            res.send(Promise.resolve(100))
+        }, 5000);
+    });
     app.post(`${baseUrl}/signup`, controller.signup);
     app.get(`${baseUrl}/getuser/:userid`, controller.getuser);
     app.post(`${baseUrl}/login`, controller.login);
