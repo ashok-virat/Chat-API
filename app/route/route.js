@@ -23,9 +23,9 @@ let setRouter = (app) => {
     let baseUrl = `${appConfig.apiVersion}`;
     app.get(`${baseUrl}/loop`, async (req, res) => {
         // blocking loop
-        // for (let i = 0; i <= 1000000; i++) {
-        //     console.log(i)
-        // }
+        for (let i = 0; i <= 10000; i++) {
+            console.log(i)
+        }
         res.send('hi')
     });
     app.get(`${baseUrl}/get`, (req, res) => {
